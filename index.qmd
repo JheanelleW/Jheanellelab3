@@ -1,0 +1,412 @@
+---
+title: "Linear Regression: Model Specification, Comparison, and Interpretation"
+subtitle: "Predicting overall workplace ratings"
+author: "Jheanelle Walters"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    embed-resources: true
+    theme: cosmo
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+## 1. Data and exploration
+
+```{r}
+#| label: setup
+
+# Load packages used throughout the report
+library(dplyr)    # data manipulation
+library(tidyr)    # reshaping data and handling missing values
+library(ggplot2)  # plotting
+library(broom)    # tidy(), glance(): turn model results into data frames
+library(performance)  # model diagnostics
+library(gt)       # formatted tables
+
+# Build the analysis dataset from the built-in 'attitude' data:
+# keep the outcome (rating) and the three predictors, and drop any
+# rows with missing values so all models use the same observations
+dat <- attitude |>
+  select(rating, complaints, learning, raises) |>
+  drop_na()
+
+# Store the sample size so the text can refer to it with inline code
+n <- nrow(dat)
+```
+
+The analysis includes **`r n` departments**. Each observation is a department-level summary of employee responses, not an individual employee.
+
+### Descriptive statistics
+
+```{r}
+#| label: descriptive-table
+#| tbl-cap: "Descriptive statistics for analysis variables"
+
+# Compute mean, SD, min, and max for every analysis variable
+# (one wide row of results at first)
+descriptives <- dat |>
+  summarise(
+    across(
+      c(rating, complaints, learning, raises),
+      list(mean = mean, sd = sd, min = min, max = max)
+    )
+  ) |>
+  # Reshape so each variable is a row and each statistic is a column
+  pivot_longer(
+    everything(),
+    names_to = c("variable", ".value"),
+    names_sep = "_"
+  )
+
+# Format as a table with 2 decimal places
+descriptives |>
+  gt() |>
+  fmt_number(columns = where(is.numeric), decimals = 2)
+```
+
+### Distribution of overall rating
+
+```{r}
+#| label: outcome-distribution
+#| fig-cap: "Distribution of overall workplace ratings"
+
+# Histogram of the outcome on the density scale, so the density
+# curve can be overlaid on the same axis
+ggplot(dat, aes(x = rating)) +
+  geom_histogram(
+    aes(y = after_stat(density)),
+    bins = 10,
+    fill = "#669BBC",
+    color = "white",
+    alpha = 0.8
+  ) +
+  geom_density(linewidth = 0.9, color = "#9A3038") +
+  labs(x = "Overall workplace rating", y = "Density") +
+  theme_minimal(base_size = 12)
+```
+
+### Relationships between predictors and rating
+
+```{r}
+#| label: complaints-scatterplot
+#| fig-cap: "Relationship between complaint handling and overall rating"
+
+# Scatterplot with a fitted linear regression line (method = "lm")
+# and its 95% confidence band, to check whether the relationship
+# looks linear
+ggplot(dat, aes(x = complaints, y = rating)) +
+  geom_point(alpha = 0.75) +
+  geom_smooth(method = "lm", se = TRUE, color = "#27638A") +
+  labs(x = "Handling of employee complaints", y = "Overall rating") +
+  theme_minimal(base_size = 12)
+```
+
+### Exploratory patterns
+
+Overall workplace ratings across the 30 departments ranged from 40 to 85 (M = 64.63). The histogram shows ratings concentrated around 65, with a somewhat longer tail toward lower ratings and smaller clusters near 45 to 50 and 80. All three predictors were positively associated with rating, and the relationships appear approximately linear. Complaint handling showed the strongest and tightest relationship (r = .83), followed by learning opportunities (r = .62) and pay increases (r = .59). The predictors were also moderately correlated with each other (r = .60 to .67), which may matter when they are entered together. One department with the highest pay-increase score (about 88) had only a moderate overall rating, making it an unusual observation worth checking in the diagnostics. These patterns [are consistent with / differ from] my expectations because [your reason].
+
+---
+
+## 2. Specify competing models
+
+### Predictions
+
+I expected all three predictors to be positively associated with overall workplace ratings. Handling of employee complaints seemed the most likely to matter. When employees feel that problems are taken seriously and resolved fairly, they are likely to trust their workplace and rate it more favourably overall. Opportunities to learn should explain additional variation beyond complaint handling, because a workplace that supports growth and skill development reflects a different part of employee experience than how problems are managed. Pay increases may also add to the explanation after accounting for complaints and learning, since people tend to view fair compensation as a sign that their work is valued. However, I expected the pay increase to contribute less than the other two, because pay may overlap with the other predictors. For these reasons, I predicted that adding each predictor in turn would improve model fit, with complaints contributing the most.
+
+We will estimate four nested models:
+
+| Model | Formula | Purpose |
+|:--|:--|:--|
+| M0: Null | `rating ~ 1` | Baseline model |
+| M1: Complaints | `rating ~ complaints` | Evaluate complaint handling |
+| M2: Complaints + Learning | `rating ~ complaints + learning` | Additional contribution of learning |
+| M3: Expanded | `rating ~ complaints + learning + raises` | Additional contribution of pay increases |
+
+```{r}
+#| label: fit-models
+
+# Four nested models, each adding predictors to the one before it.
+# All use the same data, so differences in fit come from the predictors.
+mod0 <- lm(rating ~ 1, data = dat)                                # intercept only (baseline)
+mod1 <- lm(rating ~ complaints, data = dat)                       # + complaints
+mod2 <- lm(rating ~ complaints + learning, data = dat)            # + learning
+mod3 <- lm(rating ~ complaints + learning + raises, data = dat)   # + raises
+```
+
+### How the complaints coefficient changes
+
+In M1, the complaints coefficient (`r round(coef(mod1)["complaints"], 2)`) describes the association between complaint handling and overall rating with nothing else controlled: departments scoring one point higher on complaint handling were rated about `r round(coef(mod1)["complaints"], 2)` points higher overall, on average. In M2, the coefficient (`r round(coef(mod2)["complaints"], 2)`) is the association after holding learning opportunities constant. It is smaller, because part of the M1 association overlapped with learning. In M3, the coefficient (`r round(coef(mod3)["complaints"], 2)`) is the association holding both learning and pay increases constant. It is nearly unchanged from M2, so adding pay increases did not account for any further part of the complaints association. In all three models, complaint handling remained positively associated with rating.
+
+```{r}
+#| label: learning-scatterplot
+#| fig-cap: "Relationship between learning opportunities and overall rating"
+
+# Same plot as above, for the learning predictor
+ggplot(dat, aes(x = learning, y = rating)) +
+  geom_point(alpha = 0.75) +
+  geom_smooth(method = "lm", se = TRUE, color = "#27638A") +
+  labs(x = "Opportunity to learn", y = "Overall rating") +
+  theme_minimal(base_size = 12)
+```
+
+```{r}
+#| label: raises-scatterplot
+#| fig-cap: "Relationship between pay increases and overall rating"
+
+# Same plot as above, for the raises predictor
+ggplot(dat, aes(x = raises, y = rating)) +
+  geom_point(alpha = 0.75) +
+  geom_smooth(method = "lm", se = TRUE, color = "#27638A") +
+  labs(x = "Pay increases", y = "Overall rating") +
+  theme_minimal(base_size = 12)
+```
+
+
+---
+
+## 3. Compare model performance
+
+```{r}
+#| label: nested-tests
+
+# Compare all four nested models in one call. Each row after the first
+# tests whether that model fits significantly better than the one before it.
+tests <- anova(mod0, mod1, mod2, mod3)
+
+# Keep only the columns needed for the comparison table, with clear names
+tests <- tests |>
+  select(Res.Df, Df, F, `Pr(>F)`) |>
+  rename(
+    Residual.df = Res.Df,
+    Nested.Df = Df,
+    Nested.F.stat = F,
+    Nested.p.value = `Pr(>F)`
+  )
+```
+
+```{r}
+#| label: model-performance
+
+# glance() returns one row of model-level statistics per model.
+# Stack the four rows into one data frame, then label each model
+# and calculate RMSE directly from each model's residuals.
+performance_table <- bind_rows(
+  glance(mod0),
+  glance(mod1),
+  glance(mod2),
+  glance(mod3)
+) |>
+  mutate(
+    Model = c("M0: Null", "M1: Complaints", "M2: + Learning", "M3: + Raises"),
+    RMSE = c(
+      sqrt(mean(residuals(mod0)^2)),
+      sqrt(mean(residuals(mod1)^2)),
+      sqrt(mean(residuals(mod2)^2)),
+      sqrt(mean(residuals(mod3)^2))
+    )
+  )
+
+# Change in R-squared from the preceding model.
+# lag() shifts values down one row, so M0 gets NA (no preceding model).
+performance_table <- performance_table |>
+  mutate(Delta.R2 = r.squared - lag(r.squared))
+```
+
+```{r}
+#| label: comparison-table-data
+
+# Combine performance statistics with the nested-test results.
+# Both have the same four models in the same order, so cbind() lines them up.
+comparison_table <- cbind(performance_table, as.data.frame(tests)) |>
+  select(
+    Model,
+    r.squared,
+    Delta.R2,
+    adj.r.squared,
+    RMSE,
+    Residual.df,
+    Nested.Df,
+    Nested.F.stat,
+    Nested.p.value
+  )
+```
+
+```{r}
+#| label: model-comparison-table
+#| tbl-cap: "Overall model performance and incremental nested-model comparisons"
+
+# Format the combined table with readable labels and decimal places
+comparison_table |>
+  gt() |>
+  cols_label(
+    Model = "Model",
+    r.squared = "R²",
+    Delta.R2 = "ΔR²",
+    adj.r.squared = "Adjusted R²",
+    RMSE = "RMSE",
+    Residual.df = "Residual df",
+    Nested.Df = "Nested df",
+    Nested.F.stat = "Nested F",
+    Nested.p.value = "Nested p"
+  ) |>
+  fmt_number(
+    columns = c(r.squared, Delta.R2, adj.r.squared, RMSE, Nested.F.stat),
+    decimals = 3
+  ) |>
+  # Show very small p-values as "< .001" and missing values as a dash
+  fmt(
+    columns = Nested.p.value,
+    fns = function(x) {
+      ifelse(is.na(x), "—", ifelse(x < .001, "< .001", sprintf("%.3f", x)))
+    }
+  ) |>
+  # The null model has no preceding model, so these cells are blank
+  sub_missing(
+    columns = c(Delta.R2, Nested.Df, Nested.F.stat),
+    missing_text = "—"
+  )
+```
+
+[Write your model-comparison paragraph here, after you've seen the table.]
+
+---
+
+## 4. Evaluate regression diagnostics
+
+```{r}
+#| label: select-model
+
+# The model carried forward into diagnostics and reporting.
+# To switch models, change these two lines (mod1, mod2, or mod3).
+selected_model <- mod2
+selected_name <- "M2: + Learning"
+```
+
+```{r}
+#| label: diagnostics
+#| fig-cap: "Regression diagnostic plots for the selected model"
+#| fig-width: 9
+#| fig-height: 8
+
+# Standard diagnostic plots in a 2 x 2 grid:
+# residuals vs fitted, normal Q-Q, scale-location, residuals vs leverage
+op <- par(mfrow = c(2, 2))
+plot(selected_model)
+par(op)
+```
+
+```{r}
+#| label: collinearity
+#| tbl-cap: "Variance inflation factors for the selected model"
+
+# VIF near 1 means a predictor is not strongly predicted by the others.
+# Values above about 5 would suggest a multicollinearity problem.
+check_collinearity(selected_model) |>
+  as.data.frame() |>
+  select(any_of(c("Term", "VIF", "Tolerance"))) |>
+  gt() |>
+  fmt_number(columns = where(is.numeric), decimals = 2)
+```
+
+Residuals versus fitted values showed [no clear curvature / describe any pattern], suggesting that a linear specification is [adequate / questionable]. The normal Q-Q plot showed [points close to the line / deviations at the tails], and a Shapiro-Wilk test did not detect a significant departure from normality (W = .945, p = .123), although with only 30 departments this test has limited power. The scale-location plot showed [roughly constant spread / describe]. The largest Cook's distance was 0.17 (department 24), well below the conventional cutoffs of 0.5 and 1, so no single department appears to dominate the fitted model. Variance inflation factors were [value] for both predictors, below the usual threshold of 5, so multicollinearity does not appear to be a concern despite the moderate correlation between complaints and learning. Overall, the main assumptions appear reasonably satisfied. [Mention any caveat you saw in the plots.] Given the small sample, these checks are best read as screening for serious problems, not as proof that the assumptions hold, and I retain reasonable confidence in the model.
+
+
+---
+
+## 5. Select and report the preferred model
+
+### Why this model
+
+```{r}
+#| label: extract-coefficients
+
+# Extract coefficients with 95% confidence intervals from the selected model
+coefficient_results <- tidy(selected_model, conf.int = TRUE, conf.level = 0.95)
+
+# Helper: pull one value (e.g., the estimate) for one predictor,
+# so the written interpretation can use inline code instead of typed numbers
+coef_val <- function(predictor, column) {
+  coefficient_results[coefficient_results$term == predictor, ][[column]]
+}
+
+# Helper: format a p-value for the text ("< .001" or "= .128")
+fmt_p <- function(p) {
+  ifelse(p < .001, "< .001", paste0("= ", sub("^0", "", sprintf("%.3f", p))))
+}
+
+# Performance row for the selected model (label must match comparison_table)
+selected_row <- comparison_table[comparison_table$Model == selected_name, ]
+```
+
+I selected M2 (complaints and learning). The nested F-tests showed that complaint handling significantly improved on the null model (F = 60.7, p < .001), whereas learning (ΔR² = .027, p = .135) and pay increases (ΔR² = .0003, p = .876) did not produce statistically significant improvements. Even so, M2 had the highest adjusted R² (.686, compared with .670 for M1 and .675 for M3) and a lower RMSE than M1 (6.47 compared with 6.76). I rejected M3 because pay increases added essentially nothing and lowered adjusted R². I preferred M2 to M1 because learning opportunities were a theoretically motivated predictor, the diagnostics showed no serious problems, and the added complexity is small. M1 remains a defensible simpler alternative, because the improvement from learning was not statistically significant.
+
+### Coefficient table
+
+```{r}
+#| label: coefficient-table
+#| tbl-cap: "Unstandardized regression coefficients for the selected model"
+
+# Keep the columns requested in the lab and format them for reporting
+coefficient_results |>
+  select(term, estimate, std.error, conf.low, conf.high, p.value) |>
+  gt() |>
+  cols_label(
+    term = "Predictor",
+    estimate = "Estimate",
+    std.error = "SE",
+    conf.low = "95% CI lower",
+    conf.high = "95% CI upper",
+    p.value = "p"
+  ) |>
+  fmt_number(
+    columns = c(estimate, std.error, conf.low, conf.high),
+    decimals = 3
+  ) |>
+  # Show very small p-values as "< .001"
+  fmt(
+    columns = p.value,
+    fns = function(x) ifelse(x < .001, "< .001", sprintf("%.3f", x))
+  )
+```
+
+### Interpreting the coefficients
+
+Holding learning opportunities constant, a one-point increase in a department's complaint-handling score was associated with a `r round(coef_val("complaints", "estimate"), 2)`-point higher predicted overall rating, 95% CI [`r round(coef_val("complaints", "conf.low"), 2)`, `r round(coef_val("complaints", "conf.high"), 2)`], p `r fmt_p(coef_val("complaints", "p.value"))`. The interval is entirely positive, so the data are consistent with a clear positive association.
+
+Holding complaint handling constant, a one-point increase in the learning-opportunity score was associated with a `r round(coef_val("learning", "estimate"), 2)`-point higher predicted overall rating, 95% CI [`r round(coef_val("learning", "conf.low"), 2)`, `r round(coef_val("learning", "conf.high"), 2)`], p `r fmt_p(coef_val("learning", "p.value"))`. The direction is positive, but the interval includes zero, so the data are also consistent with no association, and this estimate is much less certain than the one for complaints.
+
+All scores are department-level percentages of favourable responses, so a one-point difference is a one-percentage-point difference.
+
+### Model performance
+
+```{r}
+#| label: selected-model-performance
+#| tbl-cap: "Overall performance of the selected model"
+
+# Report R-squared, adjusted R-squared, and RMSE for the selected model
+selected_row |>
+  select(Model, r.squared, adj.r.squared, RMSE) |>
+  gt() |>
+  cols_label(
+    Model = "Model",
+    r.squared = "R²",
+    adj.r.squared = "Adjusted R²",
+    RMSE = "RMSE"
+  ) |>
+  fmt_number(columns = where(is.numeric), decimals = 3)
+```
+
+The selected model explained approximately `r round(100 * selected_row$r.squared, 1)`% of the variation in overall workplace ratings across these departments (R² = `r round(selected_row$r.squared, 3)`; adjusted R² = `r round(selected_row$adj.r.squared, 3)`). Its in-sample RMSE was `r round(selected_row$RMSE, 2)` rating points, meaning that the fitted ratings typically differ from the observed ratings by about that much. This describes fit to these 30 departments, not accuracy for new departments.
+
+
+---
+
+## 6. Discussion and limitations
+
+Complaint handling was by far the most important predictor of overall workplace ratings. Alone, it explained about 68% of the variation in ratings and was the only addition that significantly improved model fit. Learning opportunities added a small amount beyond complaints, and the improvement was not statistically significant. Pay increases added essentially nothing once complaints and learning were included. This does not mean that learning and pay are unrelated to ratings. The three predictors are moderately correlated with each other (r = .60 to .67), so much of what learning and pay would explain is already captured by complaint handling.
+
+Several limitations apply. The sample contains only 30 departments, so estimates are imprecise (note the wide confidence interval for learning) and statistical tests have limited power. The observations are department-level summaries, so the results describe departments, not individual employees. The data are observational, so the coefficients describe associations, not causal effects. The choice between M1 and M2 rests on adjusted R² and RMSE, not on a statistically significant improvement, so a reader preferring a simpler model could reasonably choose M1. Finally, the reported performance is in-sample and does not show how well the model would predict ratings for new departments.
