@@ -4075,24 +4075,25 @@ vertical-align: -.125em;
 <section id="data-and-exploration" class="level2">
 <h2 class="anchored" data-anchor-id="data-and-exploration">1. Data and exploration</h2>
 <p>The analysis includes <strong>30 departments</strong>. Each observation is a department-level summary of employee responses, not an individual employee.</p>
+<p>The data come from <code>attitude</code>, a dataset built into R that summarizes employee survey responses by department. The outcome variable is <code>rating</code>, the overall workplace rating, and the three predictors are <code>complaints</code> (handling of employee complaints), <code>learning</code> (opportunity to learn), and <code>raises</code> (pay increases).</p>
 <section id="descriptive-statistics" class="level3">
 <h3 class="anchored" data-anchor-id="descriptive-statistics">Descriptive statistics</h3>
 <div class="cell" data-tbl-cap="Descriptive statistics for analysis variables">
 <div class="cell-output-display">
-<div id="btawzffxqw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#btawzffxqw table {
+<div id="acmzwgyvbv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#acmzwgyvbv table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#btawzffxqw thead, #btawzffxqw tbody, #btawzffxqw tfoot, #btawzffxqw tr, #btawzffxqw td, #btawzffxqw th {
+#acmzwgyvbv thead, #acmzwgyvbv tbody, #acmzwgyvbv tfoot, #acmzwgyvbv tr, #acmzwgyvbv td, #acmzwgyvbv th {
 border-style: none;
 }
-#btawzffxqw p {
+#acmzwgyvbv p {
 margin: 0;
 padding: 0;
 }
-#btawzffxqw .gt_table {
+#acmzwgyvbv .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -4117,11 +4118,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#btawzffxqw .gt_caption {
+#acmzwgyvbv .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#btawzffxqw .gt_title {
+#acmzwgyvbv .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -4132,7 +4133,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#btawzffxqw .gt_subtitle {
+#acmzwgyvbv .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -4143,7 +4144,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#btawzffxqw .gt_heading {
+#acmzwgyvbv .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -4154,12 +4155,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#btawzffxqw .gt_bottom_border {
+#acmzwgyvbv .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#btawzffxqw .gt_col_headings {
+#acmzwgyvbv .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -4173,7 +4174,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#btawzffxqw .gt_col_heading {
+#acmzwgyvbv .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4192,7 +4193,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#btawzffxqw .gt_column_spanner_outer {
+#acmzwgyvbv .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4203,13 +4204,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#btawzffxqw .gt_column_spanner_outer:first-child {
+#acmzwgyvbv .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#btawzffxqw .gt_column_spanner_outer:last-child {
+#acmzwgyvbv .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#btawzffxqw .gt_column_spanner {
+#acmzwgyvbv .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -4220,10 +4221,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#btawzffxqw .gt_spanner_row {
+#acmzwgyvbv .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#btawzffxqw .gt_group_heading {
+#acmzwgyvbv .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4248,7 +4249,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#btawzffxqw .gt_empty_group_heading {
+#acmzwgyvbv .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -4262,13 +4263,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#btawzffxqw .gt_from_md > :first-child {
+#acmzwgyvbv .gt_from_md > :first-child {
 margin-top: 0;
 }
-#btawzffxqw .gt_from_md > :last-child {
+#acmzwgyvbv .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#btawzffxqw .gt_row {
+#acmzwgyvbv .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4286,7 +4287,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#btawzffxqw .gt_stub {
+#acmzwgyvbv .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4298,7 +4299,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#btawzffxqw .gt_stub_row_group {
+#acmzwgyvbv .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4311,13 +4312,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#btawzffxqw .gt_row_group_first td {
+#acmzwgyvbv .gt_row_group_first td {
 border-top-width: 2px;
 }
-#btawzffxqw .gt_row_group_first th {
+#acmzwgyvbv .gt_row_group_first th {
 border-top-width: 2px;
 }
-#btawzffxqw .gt_summary_row {
+#acmzwgyvbv .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -4326,14 +4327,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#btawzffxqw .gt_first_summary_row {
+#acmzwgyvbv .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#btawzffxqw .gt_first_summary_row.thick {
+#acmzwgyvbv .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#btawzffxqw .gt_last_summary_row {
+#acmzwgyvbv .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4342,7 +4343,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#btawzffxqw .gt_grand_summary_row {
+#acmzwgyvbv .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -4351,7 +4352,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#btawzffxqw .gt_first_grand_summary_row {
+#acmzwgyvbv .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4360,7 +4361,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#btawzffxqw .gt_last_grand_summary_row_top {
+#acmzwgyvbv .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4369,10 +4370,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#btawzffxqw .gt_striped {
+#acmzwgyvbv .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#btawzffxqw .gt_table_body {
+#acmzwgyvbv .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -4380,7 +4381,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#btawzffxqw .gt_footnotes {
+#acmzwgyvbv .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -4393,7 +4394,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#btawzffxqw .gt_footnote {
+#acmzwgyvbv .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -4401,7 +4402,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#btawzffxqw .gt_sourcenotes {
+#acmzwgyvbv .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -4414,64 +4415,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#btawzffxqw .gt_sourcenote {
+#acmzwgyvbv .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#btawzffxqw .gt_left {
+#acmzwgyvbv .gt_left {
 text-align: left;
 }
-#btawzffxqw .gt_center {
+#acmzwgyvbv .gt_center {
 text-align: center;
 }
-#btawzffxqw .gt_right {
+#acmzwgyvbv .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#btawzffxqw .gt_font_normal {
+#acmzwgyvbv .gt_font_normal {
 font-weight: normal;
 }
-#btawzffxqw .gt_font_bold {
+#acmzwgyvbv .gt_font_bold {
 font-weight: bold;
 }
-#btawzffxqw .gt_font_italic {
+#acmzwgyvbv .gt_font_italic {
 font-style: italic;
 }
-#btawzffxqw .gt_super {
+#acmzwgyvbv .gt_super {
 font-size: 65%;
 }
-#btawzffxqw .gt_footnote_marks {
+#acmzwgyvbv .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#btawzffxqw .gt_asterisk {
+#acmzwgyvbv .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#btawzffxqw .gt_indent_1 {
+#acmzwgyvbv .gt_indent_1 {
 text-indent: 5px;
 }
-#btawzffxqw .gt_indent_2 {
+#acmzwgyvbv .gt_indent_2 {
 text-indent: 10px;
 }
-#btawzffxqw .gt_indent_3 {
+#acmzwgyvbv .gt_indent_3 {
 text-indent: 15px;
 }
-#btawzffxqw .gt_indent_4 {
+#acmzwgyvbv .gt_indent_4 {
 text-indent: 20px;
 }
-#btawzffxqw .gt_indent_5 {
+#acmzwgyvbv .gt_indent_5 {
 text-indent: 25px;
 }
-#btawzffxqw .katex-display {
+#acmzwgyvbv .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#btawzffxqw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#acmzwgyvbv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -4571,7 +4572,7 @@ height: 0px !important;
 </section>
 <section id="exploratory-patterns" class="level3">
 <h3 class="anchored" data-anchor-id="exploratory-patterns">Exploratory patterns</h3>
-<p>Overall workplace ratings across the 30 departments ranged from 40 to 85 (M = 64.63). The histogram shows ratings concentrated around 65, with a somewhat longer tail toward lower ratings and smaller clusters near 45 to 50 and 80. All three predictors were positively associated with rating, and the relationships appear approximately linear. Complaint handling showed the strongest and tightest relationship (r = .83), followed by learning opportunities (r = .62) and pay increases (r = .59). The predictors were also moderately correlated with each other (r = .60 to .67), which may matter when they are entered together. One department with the highest pay-increase score (about 88) had only a moderate overall rating, making it an unusual observation worth keeping in mind. These patterns are consistent with my expectations because all three predictors showed positive, approximately linear associations with rating, and complaint handling showed the strongest relationship.</p>
+<p>The dataset includes 30 departments, with overall workplace ratings ranging from 40 to 85 (M = 64.63). The histogram shows ratings concentrated around 65, although there are some lower ratings around 45-50 and higher ratings closer to 80. All three predictors showed positive relationships with overall workplace ratings, and these relationships appeared to be approximately linear. Complaint handling showed the strongest relationship with overall ratings (r = .83), followed by learning opportunities (r = .62) and pay increases (r = .59). The predictors were also moderately correlated with one another (r = .60 to .67), which could be important when including them in the same model. One observation that stood out was a department with a high pay-increase score of approximately 88 but only a moderate overall rating. Overall, these findings were consistent with what I expected, particularly the stronger relationship between complaint handling and workplace ratings.</p>
 <hr>
 </section>
 </section>
@@ -4579,7 +4580,7 @@ height: 0px !important;
 <h2 class="anchored" data-anchor-id="specify-competing-models">2. Specify competing models</h2>
 <section id="predictions" class="level3">
 <h3 class="anchored" data-anchor-id="predictions">Predictions</h3>
-<p>I expected all three predictors to be positively associated with overall workplace ratings. Handling of employee complaints seemed the most likely to matter. When employees feel that problems are taken seriously and resolved fairly, they are likely to trust their workplace and rate it more favourably overall. Opportunities to learn should explain additional variation beyond complaint handling, because a workplace that supports growth and skill development reflects a different part of employee experience than how problems are managed. Pay increases may also add to the explanation after accounting for complaints and learning, since people tend to view fair compensation as a sign that their work is valued. However, I expected the pay increase to contribute less than the other two, because pay may overlap with the other predictors. For these reasons, I predicted that adding each predictor in turn would improve model fit, with complaints contributing the most.</p>
+<p>Before running the models, I expected complaint handling, learning opportunities, and pay increases to all have positive relationships with overall workplace ratings. Of the three, I thought complaint handling would have the strongest association because employees may be more satisfied with their workplace when they feel their concerns are being heard and addressed fairly. I also expected learning opportunities to explain some additional variation in ratings beyond complaint handling, since opportunities for professional development represent a different aspect of the workplace experience. Similarly, I thought pay increases could contribute to overall ratings after accounting for complaints and learning, because employees may feel more valued when they are compensated fairly. However, I expected pay increases to have a smaller contribution, as some of its relationship with ratings might overlap with the other predictors. Based on these expectations, I predicted that each additional variable would improve the model, with complaint handling making the largest contribution.</p>
 <p>We will estimate four nested models:</p>
 <table class="caption-top table">
 <colgroup>
@@ -4628,20 +4629,20 @@ height: 0px !important;
 <h2 class="anchored" data-anchor-id="compare-model-performance">3. Compare model performance</h2>
 <div class="cell" data-tbl-cap="Overall model performance and incremental nested-model comparisons">
 <div class="cell-output-display">
-<div id="uzuwwhmrcg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#uzuwwhmrcg table {
+<div id="wrxewnbgnx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wrxewnbgnx table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#uzuwwhmrcg thead, #uzuwwhmrcg tbody, #uzuwwhmrcg tfoot, #uzuwwhmrcg tr, #uzuwwhmrcg td, #uzuwwhmrcg th {
+#wrxewnbgnx thead, #wrxewnbgnx tbody, #wrxewnbgnx tfoot, #wrxewnbgnx tr, #wrxewnbgnx td, #wrxewnbgnx th {
 border-style: none;
 }
-#uzuwwhmrcg p {
+#wrxewnbgnx p {
 margin: 0;
 padding: 0;
 }
-#uzuwwhmrcg .gt_table {
+#wrxewnbgnx .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -4666,11 +4667,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_caption {
+#wrxewnbgnx .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#uzuwwhmrcg .gt_title {
+#wrxewnbgnx .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -4681,7 +4682,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#uzuwwhmrcg .gt_subtitle {
+#wrxewnbgnx .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -4692,7 +4693,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#uzuwwhmrcg .gt_heading {
+#wrxewnbgnx .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -4703,12 +4704,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_bottom_border {
+#wrxewnbgnx .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_col_headings {
+#wrxewnbgnx .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -4722,7 +4723,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_col_heading {
+#wrxewnbgnx .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4741,7 +4742,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#uzuwwhmrcg .gt_column_spanner_outer {
+#wrxewnbgnx .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4752,13 +4753,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#uzuwwhmrcg .gt_column_spanner_outer:first-child {
+#wrxewnbgnx .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#uzuwwhmrcg .gt_column_spanner_outer:last-child {
+#wrxewnbgnx .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#uzuwwhmrcg .gt_column_spanner {
+#wrxewnbgnx .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -4769,10 +4770,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#uzuwwhmrcg .gt_spanner_row {
+#wrxewnbgnx .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#uzuwwhmrcg .gt_group_heading {
+#wrxewnbgnx .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4797,7 +4798,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#uzuwwhmrcg .gt_empty_group_heading {
+#wrxewnbgnx .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -4811,13 +4812,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#uzuwwhmrcg .gt_from_md > :first-child {
+#wrxewnbgnx .gt_from_md > :first-child {
 margin-top: 0;
 }
-#uzuwwhmrcg .gt_from_md > :last-child {
+#wrxewnbgnx .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#uzuwwhmrcg .gt_row {
+#wrxewnbgnx .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4835,7 +4836,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#uzuwwhmrcg .gt_stub {
+#wrxewnbgnx .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4847,7 +4848,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#uzuwwhmrcg .gt_stub_row_group {
+#wrxewnbgnx .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -4860,13 +4861,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#uzuwwhmrcg .gt_row_group_first td {
+#wrxewnbgnx .gt_row_group_first td {
 border-top-width: 2px;
 }
-#uzuwwhmrcg .gt_row_group_first th {
+#wrxewnbgnx .gt_row_group_first th {
 border-top-width: 2px;
 }
-#uzuwwhmrcg .gt_summary_row {
+#wrxewnbgnx .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -4875,14 +4876,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#uzuwwhmrcg .gt_first_summary_row {
+#wrxewnbgnx .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_first_summary_row.thick {
+#wrxewnbgnx .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#uzuwwhmrcg .gt_last_summary_row {
+#wrxewnbgnx .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4891,7 +4892,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_grand_summary_row {
+#wrxewnbgnx .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -4900,7 +4901,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#uzuwwhmrcg .gt_first_grand_summary_row {
+#wrxewnbgnx .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4909,7 +4910,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_last_grand_summary_row_top {
+#wrxewnbgnx .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -4918,10 +4919,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_striped {
+#wrxewnbgnx .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#uzuwwhmrcg .gt_table_body {
+#wrxewnbgnx .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -4929,7 +4930,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_footnotes {
+#wrxewnbgnx .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -4942,7 +4943,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_footnote {
+#wrxewnbgnx .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -4950,7 +4951,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#uzuwwhmrcg .gt_sourcenotes {
+#wrxewnbgnx .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -4963,64 +4964,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#uzuwwhmrcg .gt_sourcenote {
+#wrxewnbgnx .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#uzuwwhmrcg .gt_left {
+#wrxewnbgnx .gt_left {
 text-align: left;
 }
-#uzuwwhmrcg .gt_center {
+#wrxewnbgnx .gt_center {
 text-align: center;
 }
-#uzuwwhmrcg .gt_right {
+#wrxewnbgnx .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#uzuwwhmrcg .gt_font_normal {
+#wrxewnbgnx .gt_font_normal {
 font-weight: normal;
 }
-#uzuwwhmrcg .gt_font_bold {
+#wrxewnbgnx .gt_font_bold {
 font-weight: bold;
 }
-#uzuwwhmrcg .gt_font_italic {
+#wrxewnbgnx .gt_font_italic {
 font-style: italic;
 }
-#uzuwwhmrcg .gt_super {
+#wrxewnbgnx .gt_super {
 font-size: 65%;
 }
-#uzuwwhmrcg .gt_footnote_marks {
+#wrxewnbgnx .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#uzuwwhmrcg .gt_asterisk {
+#wrxewnbgnx .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#uzuwwhmrcg .gt_indent_1 {
+#wrxewnbgnx .gt_indent_1 {
 text-indent: 5px;
 }
-#uzuwwhmrcg .gt_indent_2 {
+#wrxewnbgnx .gt_indent_2 {
 text-indent: 10px;
 }
-#uzuwwhmrcg .gt_indent_3 {
+#wrxewnbgnx .gt_indent_3 {
 text-indent: 15px;
 }
-#uzuwwhmrcg .gt_indent_4 {
+#wrxewnbgnx .gt_indent_4 {
 text-indent: 20px;
 }
-#uzuwwhmrcg .gt_indent_5 {
+#wrxewnbgnx .gt_indent_5 {
 text-indent: 25px;
 }
-#uzuwwhmrcg .katex-display {
+#wrxewnbgnx .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#uzuwwhmrcg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wrxewnbgnx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -5093,7 +5094,8 @@ height: 0px !important;
 </div>
 <section id="interpreting-the-model-comparison" class="level3">
 <h3 class="anchored" data-anchor-id="interpreting-the-model-comparison">Interpreting the model comparison</h3>
-<p>M3 explained the largest proportion of variation in rating (R² = 0.7083), but its advantage over M2 (R² = 0.7080) was negligible. Adding complaints to the null model produced the only large improvement (ΔR² = 0.681, p &lt; .001). Adding learning increased explained variance by only 0.027 (p = 0.135), and adding pay increases increased it by 0.0003 (p = 0.876); neither improvement was statistically significant. Adjusted R² rose from 0.670 in M1 to 0.686 in M2, then fell to 0.675 in M3, suggesting that the pay-increase predictor added complexity without adding explanatory value. RMSE fell from 11.97 for the null model to 6.76 for M1, a substantively meaningful reduction, but changed by less than 0.3 rating points with the addition of learning and by almost nothing with the addition of pay increases. Overall, the results suggest that complaint handling is the key predictor of overall rating, and that learning opportunities and pay increases add little once complaints are accounted for.</p>
+<p>Although M3 explained the highest proportion of variation in workplace ratings (R² = .7083), the difference between M3 and M2 (R² = .7080) was extremely small. The greatest improvement occurred when complaint handling was added to the null model, explaining an additional 68.1% of the variation in ratings (p &lt; .001). Adding learning opportunities increased the explained variation by only 2.7% (p = .135), while pay increases contributed almost nothing additional (ΔR² = .0003, p = .876). Neither of these improvements was statistically significant.</p>
+<p>The adjusted R² increased from .670 in M1 to .686 in M2 but decreased to .675 in M3. This suggests that adding pay increases made the model more complex without meaningfully improving its performance. A similar pattern was seen with RMSE, which decreased substantially from 11.97 in the null model to 6.76 in M1. However, adding learning opportunities produced only a small further decrease, and adding pay increases had almost no effect. Overall, these findings suggest that complaint handling accounts for most of the variation explained by the models, while learning opportunities and pay increases provide limited additional information.</p>
 <hr>
 </section>
 </section>
@@ -5111,20 +5113,20 @@ height: 0px !important;
 </div>
 <div class="cell" data-tbl-cap="Variance inflation factors for the selected model">
 <div class="cell-output-display">
-<div id="qpgsglriav" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qpgsglriav table {
+<div id="twnpbkqgiv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#twnpbkqgiv table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#qpgsglriav thead, #qpgsglriav tbody, #qpgsglriav tfoot, #qpgsglriav tr, #qpgsglriav td, #qpgsglriav th {
+#twnpbkqgiv thead, #twnpbkqgiv tbody, #twnpbkqgiv tfoot, #twnpbkqgiv tr, #twnpbkqgiv td, #twnpbkqgiv th {
 border-style: none;
 }
-#qpgsglriav p {
+#twnpbkqgiv p {
 margin: 0;
 padding: 0;
 }
-#qpgsglriav .gt_table {
+#twnpbkqgiv .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -5149,11 +5151,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#qpgsglriav .gt_caption {
+#twnpbkqgiv .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#qpgsglriav .gt_title {
+#twnpbkqgiv .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -5164,7 +5166,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#qpgsglriav .gt_subtitle {
+#twnpbkqgiv .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -5175,7 +5177,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#qpgsglriav .gt_heading {
+#twnpbkqgiv .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -5186,12 +5188,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#qpgsglriav .gt_bottom_border {
+#twnpbkqgiv .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#qpgsglriav .gt_col_headings {
+#twnpbkqgiv .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -5205,7 +5207,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#qpgsglriav .gt_col_heading {
+#twnpbkqgiv .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -5224,7 +5226,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#qpgsglriav .gt_column_spanner_outer {
+#twnpbkqgiv .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -5235,13 +5237,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#qpgsglriav .gt_column_spanner_outer:first-child {
+#twnpbkqgiv .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#qpgsglriav .gt_column_spanner_outer:last-child {
+#twnpbkqgiv .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#qpgsglriav .gt_column_spanner {
+#twnpbkqgiv .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -5252,10 +5254,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#qpgsglriav .gt_spanner_row {
+#twnpbkqgiv .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#qpgsglriav .gt_group_heading {
+#twnpbkqgiv .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5280,7 +5282,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#qpgsglriav .gt_empty_group_heading {
+#twnpbkqgiv .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -5294,13 +5296,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#qpgsglriav .gt_from_md > :first-child {
+#twnpbkqgiv .gt_from_md > :first-child {
 margin-top: 0;
 }
-#qpgsglriav .gt_from_md > :last-child {
+#twnpbkqgiv .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#qpgsglriav .gt_row {
+#twnpbkqgiv .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5318,7 +5320,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#qpgsglriav .gt_stub {
+#twnpbkqgiv .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -5330,7 +5332,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#qpgsglriav .gt_stub_row_group {
+#twnpbkqgiv .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -5343,13 +5345,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#qpgsglriav .gt_row_group_first td {
+#twnpbkqgiv .gt_row_group_first td {
 border-top-width: 2px;
 }
-#qpgsglriav .gt_row_group_first th {
+#twnpbkqgiv .gt_row_group_first th {
 border-top-width: 2px;
 }
-#qpgsglriav .gt_summary_row {
+#twnpbkqgiv .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -5358,14 +5360,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#qpgsglriav .gt_first_summary_row {
+#twnpbkqgiv .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#qpgsglriav .gt_first_summary_row.thick {
+#twnpbkqgiv .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#qpgsglriav .gt_last_summary_row {
+#twnpbkqgiv .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5374,7 +5376,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#qpgsglriav .gt_grand_summary_row {
+#twnpbkqgiv .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -5383,7 +5385,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#qpgsglriav .gt_first_grand_summary_row {
+#twnpbkqgiv .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5392,7 +5394,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#qpgsglriav .gt_last_grand_summary_row_top {
+#twnpbkqgiv .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5401,10 +5403,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#qpgsglriav .gt_striped {
+#twnpbkqgiv .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#qpgsglriav .gt_table_body {
+#twnpbkqgiv .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -5412,7 +5414,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#qpgsglriav .gt_footnotes {
+#twnpbkqgiv .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -5425,7 +5427,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#qpgsglriav .gt_footnote {
+#twnpbkqgiv .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -5433,7 +5435,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#qpgsglriav .gt_sourcenotes {
+#twnpbkqgiv .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -5446,64 +5448,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#qpgsglriav .gt_sourcenote {
+#twnpbkqgiv .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#qpgsglriav .gt_left {
+#twnpbkqgiv .gt_left {
 text-align: left;
 }
-#qpgsglriav .gt_center {
+#twnpbkqgiv .gt_center {
 text-align: center;
 }
-#qpgsglriav .gt_right {
+#twnpbkqgiv .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#qpgsglriav .gt_font_normal {
+#twnpbkqgiv .gt_font_normal {
 font-weight: normal;
 }
-#qpgsglriav .gt_font_bold {
+#twnpbkqgiv .gt_font_bold {
 font-weight: bold;
 }
-#qpgsglriav .gt_font_italic {
+#twnpbkqgiv .gt_font_italic {
 font-style: italic;
 }
-#qpgsglriav .gt_super {
+#twnpbkqgiv .gt_super {
 font-size: 65%;
 }
-#qpgsglriav .gt_footnote_marks {
+#twnpbkqgiv .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#qpgsglriav .gt_asterisk {
+#twnpbkqgiv .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#qpgsglriav .gt_indent_1 {
+#twnpbkqgiv .gt_indent_1 {
 text-indent: 5px;
 }
-#qpgsglriav .gt_indent_2 {
+#twnpbkqgiv .gt_indent_2 {
 text-indent: 10px;
 }
-#qpgsglriav .gt_indent_3 {
+#twnpbkqgiv .gt_indent_3 {
 text-indent: 15px;
 }
-#qpgsglriav .gt_indent_4 {
+#twnpbkqgiv .gt_indent_4 {
 text-indent: 20px;
 }
-#qpgsglriav .gt_indent_5 {
+#twnpbkqgiv .gt_indent_5 {
 text-indent: 25px;
 }
-#qpgsglriav .katex-display {
+#twnpbkqgiv .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#qpgsglriav div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#twnpbkqgiv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -5534,33 +5536,35 @@ height: 0px !important;
 </div>
 </div>
 </div>
-<p>Residuals versus fitted values showed no clear curvature, with the smoothed line staying close to zero across the range of fitted values, suggesting that a linear specification is adequate for these data. The normal Q-Q plot showed residuals following the reference line through the middle of the distribution, with the most extreme residuals slightly less extreme than a normal distribution would predict. A Shapiro-Wilk test also did not detect a significant departure from normality (W = .945, p = .123), although with only 30 departments this test has limited power. The scale-location plot suggested that residual spread was somewhat larger at low fitted values and smaller in the middle of the range, but there was no clear funnel pattern, so there was no strong evidence of heteroscedasticity. In the residuals-versus-leverage plot, department 24 had the highest leverage but a small residual, and its Cook’s distance (0.17) was well below the conventional cutoffs of 0.5 and 1, so no single department appears to dominate the fitted model. Variance inflation factors were 1.55 for both predictors, well below the usual threshold of 5, so multicollinearity does not appear to be a concern despite the moderate correlation between complaints and learning. Overall, the main assumptions appear reasonably satisfied. Given the small sample, these checks are best read as screening for serious problems, not as proof that the assumptions hold, and I retain reasonable confidence in the model.</p>
+<p>The residuals-versus-fitted plot did not show any obvious curved patterns, and the smoothed line remained close to zero. This suggests that a linear model is reasonable for these data. The normal Q-Q plot also showed that most residuals followed the reference line fairly closely, although there were some small differences at the extremes. The Shapiro-Wilk test was not statistically significant (W = .945, p = .123), meaning there was no strong evidence that the residuals differed from a normal distribution. However, the small sample size should be considered when interpreting this result.</p>
+<p>The scale-location plot showed some differences in the spread of residuals, particularly at lower fitted values, but there was no obvious funnel-shaped pattern to suggest a major issue with unequal variance. In the residuals-versus-leverage plot, department 24 had the highest leverage but a relatively small residual. Its Cook’s distance was 0.17, which was below the commonly used thresholds of 0.5 and 1, suggesting that it did not have an unusually large influence on the model. The variance inflation factors were also low (VIF = 1.55 for both predictors), indicating that multicollinearity was not a major concern. Overall, the diagnostic results did not identify any serious problems with the model assumptions, so I have reasonable confidence in using this model to interpret the associations. However, because the sample included only 30 departments, these findings should be interpreted cautiously.</p>
 <hr>
 </section>
 <section id="model-selection" class="level2">
 <h2 class="anchored" data-anchor-id="model-selection">5. Model selection</h2>
 <section id="why-this-model" class="level3">
 <h3 class="anchored" data-anchor-id="why-this-model">Why this model</h3>
-<p>I selected M2 (complaints and learning). The nested F-tests showed that complaint handling significantly improved on the null model (F = 60.7, p &lt; .001), whereas learning (ΔR² = .027, p = .135) and pay increases (ΔR² = .0003, p = .876) did not produce statistically significant improvements. Even so, M2 had the highest adjusted R² (.686, compared with .670 for M1 and .675 for M3) and a lower RMSE than M1 (6.47 compared with 6.76). I rejected M3 because pay increases added essentially nothing and lowered adjusted R². I preferred M2 to M1 because learning opportunities were a theoretically motivated predictor, the diagnostics showed no serious problems, and the added complexity is small. M1 remains a defensible simpler alternative, because the improvement from learning was not statistically significant.</p>
+<p>I selected M2, which includes complaint handling and learning opportunities, as the final model. The model comparisons showed that adding complaint handling significantly improved model fit compared with the null model (F = 60.7, p &lt; .001). In contrast, adding learning opportunities (ΔR² = 0.027, p = .135) or pay increases (ΔR² = 0.0003, p = .876) did not lead to statistically significant improvements.</p>
+<p>Despite this, M2 had the highest adjusted R² (0.686) and a slightly lower RMSE (6.47) than M1 (6.76). I decided against M3 because pay increases explained almost no additional variation and resulted in a lower adjusted R² (0.675). Although learning opportunities did not significantly improve the model, I chose to keep this predictor because it was relevant to my initial expectations and only added one additional variable. The diagnostic results also did not suggest any major concerns with M2, and the model remains easy to interpret, because each of its two predictors can be read directly in rating points. However, M1 would still be a reasonable alternative for someone who preferred a simpler model.</p>
 </section>
 <section id="coefficient-table" class="level3">
 <h3 class="anchored" data-anchor-id="coefficient-table">Coefficient table</h3>
 <div class="cell" data-tbl-cap="Unstandardized regression coefficients for the selected model">
 <div class="cell-output-display">
-<div id="rzstvhovxr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#rzstvhovxr table {
+<div id="pccftyhjuw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pccftyhjuw table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#rzstvhovxr thead, #rzstvhovxr tbody, #rzstvhovxr tfoot, #rzstvhovxr tr, #rzstvhovxr td, #rzstvhovxr th {
+#pccftyhjuw thead, #pccftyhjuw tbody, #pccftyhjuw tfoot, #pccftyhjuw tr, #pccftyhjuw td, #pccftyhjuw th {
 border-style: none;
 }
-#rzstvhovxr p {
+#pccftyhjuw p {
 margin: 0;
 padding: 0;
 }
-#rzstvhovxr .gt_table {
+#pccftyhjuw .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -5585,11 +5589,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#rzstvhovxr .gt_caption {
+#pccftyhjuw .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#rzstvhovxr .gt_title {
+#pccftyhjuw .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -5600,7 +5604,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#rzstvhovxr .gt_subtitle {
+#pccftyhjuw .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -5611,7 +5615,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#rzstvhovxr .gt_heading {
+#pccftyhjuw .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -5622,12 +5626,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#rzstvhovxr .gt_bottom_border {
+#pccftyhjuw .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#rzstvhovxr .gt_col_headings {
+#pccftyhjuw .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -5641,7 +5645,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#rzstvhovxr .gt_col_heading {
+#pccftyhjuw .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -5660,7 +5664,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#rzstvhovxr .gt_column_spanner_outer {
+#pccftyhjuw .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -5671,13 +5675,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#rzstvhovxr .gt_column_spanner_outer:first-child {
+#pccftyhjuw .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#rzstvhovxr .gt_column_spanner_outer:last-child {
+#pccftyhjuw .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#rzstvhovxr .gt_column_spanner {
+#pccftyhjuw .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -5688,10 +5692,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#rzstvhovxr .gt_spanner_row {
+#pccftyhjuw .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#rzstvhovxr .gt_group_heading {
+#pccftyhjuw .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5716,7 +5720,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#rzstvhovxr .gt_empty_group_heading {
+#pccftyhjuw .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -5730,13 +5734,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#rzstvhovxr .gt_from_md > :first-child {
+#pccftyhjuw .gt_from_md > :first-child {
 margin-top: 0;
 }
-#rzstvhovxr .gt_from_md > :last-child {
+#pccftyhjuw .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#rzstvhovxr .gt_row {
+#pccftyhjuw .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5754,7 +5758,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#rzstvhovxr .gt_stub {
+#pccftyhjuw .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -5766,7 +5770,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rzstvhovxr .gt_stub_row_group {
+#pccftyhjuw .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -5779,13 +5783,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#rzstvhovxr .gt_row_group_first td {
+#pccftyhjuw .gt_row_group_first td {
 border-top-width: 2px;
 }
-#rzstvhovxr .gt_row_group_first th {
+#pccftyhjuw .gt_row_group_first th {
 border-top-width: 2px;
 }
-#rzstvhovxr .gt_summary_row {
+#pccftyhjuw .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -5794,14 +5798,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rzstvhovxr .gt_first_summary_row {
+#pccftyhjuw .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#rzstvhovxr .gt_first_summary_row.thick {
+#pccftyhjuw .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#rzstvhovxr .gt_last_summary_row {
+#pccftyhjuw .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5810,7 +5814,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#rzstvhovxr .gt_grand_summary_row {
+#pccftyhjuw .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -5819,7 +5823,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rzstvhovxr .gt_first_grand_summary_row {
+#pccftyhjuw .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5828,7 +5832,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#rzstvhovxr .gt_last_grand_summary_row_top {
+#pccftyhjuw .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -5837,10 +5841,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#rzstvhovxr .gt_striped {
+#pccftyhjuw .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#rzstvhovxr .gt_table_body {
+#pccftyhjuw .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -5848,7 +5852,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#rzstvhovxr .gt_footnotes {
+#pccftyhjuw .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -5861,7 +5865,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#rzstvhovxr .gt_footnote {
+#pccftyhjuw .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -5869,7 +5873,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rzstvhovxr .gt_sourcenotes {
+#pccftyhjuw .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -5882,64 +5886,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#rzstvhovxr .gt_sourcenote {
+#pccftyhjuw .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#rzstvhovxr .gt_left {
+#pccftyhjuw .gt_left {
 text-align: left;
 }
-#rzstvhovxr .gt_center {
+#pccftyhjuw .gt_center {
 text-align: center;
 }
-#rzstvhovxr .gt_right {
+#pccftyhjuw .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#rzstvhovxr .gt_font_normal {
+#pccftyhjuw .gt_font_normal {
 font-weight: normal;
 }
-#rzstvhovxr .gt_font_bold {
+#pccftyhjuw .gt_font_bold {
 font-weight: bold;
 }
-#rzstvhovxr .gt_font_italic {
+#pccftyhjuw .gt_font_italic {
 font-style: italic;
 }
-#rzstvhovxr .gt_super {
+#pccftyhjuw .gt_super {
 font-size: 65%;
 }
-#rzstvhovxr .gt_footnote_marks {
+#pccftyhjuw .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#rzstvhovxr .gt_asterisk {
+#pccftyhjuw .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#rzstvhovxr .gt_indent_1 {
+#pccftyhjuw .gt_indent_1 {
 text-indent: 5px;
 }
-#rzstvhovxr .gt_indent_2 {
+#pccftyhjuw .gt_indent_2 {
 text-indent: 10px;
 }
-#rzstvhovxr .gt_indent_3 {
+#pccftyhjuw .gt_indent_3 {
 text-indent: 15px;
 }
-#rzstvhovxr .gt_indent_4 {
+#pccftyhjuw .gt_indent_4 {
 text-indent: 20px;
 }
-#rzstvhovxr .gt_indent_5 {
+#pccftyhjuw .gt_indent_5 {
 text-indent: 25px;
 }
-#rzstvhovxr .katex-display {
+#pccftyhjuw .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#rzstvhovxr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pccftyhjuw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -5990,28 +5994,28 @@ height: 0px !important;
 </section>
 <section id="interpreting-the-coefficients" class="level3">
 <h3 class="anchored" data-anchor-id="interpreting-the-coefficients">Interpreting the coefficients</h3>
-<p>Holding learning opportunities constant, a one-point increase in a department’s complaint-handling score was associated with a 0.64-point higher predicted overall rating, 95% CI [0.40, 0.89], p &lt; .001. The interval is entirely positive, so the data are consistent with a clear positive association.</p>
-<p>Holding complaint handling constant, a one-point increase in the learning-opportunity score was associated with a 0.21-point higher predicted overall rating, 95% CI [-0.06, 0.49], p = .128. The direction is positive, but the interval includes zero, so the data are also consistent with no association, and this estimate is much less certain than the one for complaints.</p>
-<p>Each variable is a department-level score representing the percentage of favourable employee responses, so a one-point difference corresponds to a one-percentage-point difference in the proportion of favourable responses.</p>
+<p>After accounting for learning opportunities (that is, holding them constant), a one-point increase in complaint-handling scores was associated with a predicted increase of approximately 0.64 points in overall workplace ratings (95% CI [0.40, 0.89], p &lt; .001). Since the confidence interval does not include zero, this provides evidence of a positive association between complaint handling and workplace ratings.</p>
+<p>For learning opportunities, a one-point increase was associated with a predicted increase of approximately 0.21 points in overall workplace ratings after accounting for complaint handling (95% CI [-0.06, 0.49], p = .128). Although this relationship was positive, it was not statistically significant, and the confidence interval included zero. Therefore, there is more uncertainty about the contribution of learning opportunities compared with complaint handling.</p>
+<p>It is also important to consider that these scores represent the percentage of favourable responses within each department. Therefore, a one-point increase in a predictor represents a one-percentage-point increase in favourable employee responses.</p>
 </section>
 <section id="model-performance" class="level3">
 <h3 class="anchored" data-anchor-id="model-performance">Model performance</h3>
 <div class="cell" data-tbl-cap="Overall performance of the selected model">
 <div class="cell-output-display">
-<div id="goibnaalkn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#goibnaalkn table {
+<div id="evatwlculn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#evatwlculn table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#goibnaalkn thead, #goibnaalkn tbody, #goibnaalkn tfoot, #goibnaalkn tr, #goibnaalkn td, #goibnaalkn th {
+#evatwlculn thead, #evatwlculn tbody, #evatwlculn tfoot, #evatwlculn tr, #evatwlculn td, #evatwlculn th {
 border-style: none;
 }
-#goibnaalkn p {
+#evatwlculn p {
 margin: 0;
 padding: 0;
 }
-#goibnaalkn .gt_table {
+#evatwlculn .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -6036,11 +6040,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#goibnaalkn .gt_caption {
+#evatwlculn .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#goibnaalkn .gt_title {
+#evatwlculn .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -6051,7 +6055,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#goibnaalkn .gt_subtitle {
+#evatwlculn .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -6062,7 +6066,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#goibnaalkn .gt_heading {
+#evatwlculn .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -6073,12 +6077,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#goibnaalkn .gt_bottom_border {
+#evatwlculn .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#goibnaalkn .gt_col_headings {
+#evatwlculn .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -6092,7 +6096,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#goibnaalkn .gt_col_heading {
+#evatwlculn .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -6111,7 +6115,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#goibnaalkn .gt_column_spanner_outer {
+#evatwlculn .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -6122,13 +6126,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#goibnaalkn .gt_column_spanner_outer:first-child {
+#evatwlculn .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#goibnaalkn .gt_column_spanner_outer:last-child {
+#evatwlculn .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#goibnaalkn .gt_column_spanner {
+#evatwlculn .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -6139,10 +6143,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#goibnaalkn .gt_spanner_row {
+#evatwlculn .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#goibnaalkn .gt_group_heading {
+#evatwlculn .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -6167,7 +6171,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#goibnaalkn .gt_empty_group_heading {
+#evatwlculn .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -6181,13 +6185,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#goibnaalkn .gt_from_md > :first-child {
+#evatwlculn .gt_from_md > :first-child {
 margin-top: 0;
 }
-#goibnaalkn .gt_from_md > :last-child {
+#evatwlculn .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#goibnaalkn .gt_row {
+#evatwlculn .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -6205,7 +6209,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#goibnaalkn .gt_stub {
+#evatwlculn .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -6217,7 +6221,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#goibnaalkn .gt_stub_row_group {
+#evatwlculn .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -6230,13 +6234,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#goibnaalkn .gt_row_group_first td {
+#evatwlculn .gt_row_group_first td {
 border-top-width: 2px;
 }
-#goibnaalkn .gt_row_group_first th {
+#evatwlculn .gt_row_group_first th {
 border-top-width: 2px;
 }
-#goibnaalkn .gt_summary_row {
+#evatwlculn .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -6245,14 +6249,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#goibnaalkn .gt_first_summary_row {
+#evatwlculn .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#goibnaalkn .gt_first_summary_row.thick {
+#evatwlculn .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#goibnaalkn .gt_last_summary_row {
+#evatwlculn .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -6261,7 +6265,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#goibnaalkn .gt_grand_summary_row {
+#evatwlculn .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -6270,7 +6274,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#goibnaalkn .gt_first_grand_summary_row {
+#evatwlculn .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -6279,7 +6283,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#goibnaalkn .gt_last_grand_summary_row_top {
+#evatwlculn .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -6288,10 +6292,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#goibnaalkn .gt_striped {
+#evatwlculn .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#goibnaalkn .gt_table_body {
+#evatwlculn .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -6299,7 +6303,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#goibnaalkn .gt_footnotes {
+#evatwlculn .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -6312,7 +6316,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#goibnaalkn .gt_footnote {
+#evatwlculn .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -6320,7 +6324,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#goibnaalkn .gt_sourcenotes {
+#evatwlculn .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -6333,64 +6337,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#goibnaalkn .gt_sourcenote {
+#evatwlculn .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#goibnaalkn .gt_left {
+#evatwlculn .gt_left {
 text-align: left;
 }
-#goibnaalkn .gt_center {
+#evatwlculn .gt_center {
 text-align: center;
 }
-#goibnaalkn .gt_right {
+#evatwlculn .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#goibnaalkn .gt_font_normal {
+#evatwlculn .gt_font_normal {
 font-weight: normal;
 }
-#goibnaalkn .gt_font_bold {
+#evatwlculn .gt_font_bold {
 font-weight: bold;
 }
-#goibnaalkn .gt_font_italic {
+#evatwlculn .gt_font_italic {
 font-style: italic;
 }
-#goibnaalkn .gt_super {
+#evatwlculn .gt_super {
 font-size: 65%;
 }
-#goibnaalkn .gt_footnote_marks {
+#evatwlculn .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#goibnaalkn .gt_asterisk {
+#evatwlculn .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#goibnaalkn .gt_indent_1 {
+#evatwlculn .gt_indent_1 {
 text-indent: 5px;
 }
-#goibnaalkn .gt_indent_2 {
+#evatwlculn .gt_indent_2 {
 text-indent: 10px;
 }
-#goibnaalkn .gt_indent_3 {
+#evatwlculn .gt_indent_3 {
 text-indent: 15px;
 }
-#goibnaalkn .gt_indent_4 {
+#evatwlculn .gt_indent_4 {
 text-indent: 20px;
 }
-#goibnaalkn .gt_indent_5 {
+#evatwlculn .gt_indent_5 {
 text-indent: 25px;
 }
-#goibnaalkn .katex-display {
+#evatwlculn .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#goibnaalkn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#evatwlculn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -6418,14 +6422,15 @@ height: 0px !important;
 </div>
 </div>
 </div>
-<p>The selected model explained approximately 70.8% of the variation in overall workplace ratings across these departments (R² = 0.708; adjusted R² = 0.686). Its in-sample RMSE was 6.47 rating points, meaning that the fitted ratings typically differ from the observed ratings by about that much. This describes fit to these 30 departments, not accuracy for new departments.</p>
+<p>The selected model explained approximately 70.8% of the variation in workplace ratings across the 30 departments (R² = .708), with an adjusted R² of .686. The RMSE was 6.47, suggesting that the model’s predicted ratings typically differed from the actual ratings by approximately 6.47 points. However, this only reflects how well the model fits the departments included in the analysis and does not necessarily indicate how well it would predict ratings for other departments.</p>
 <hr>
 </section>
 </section>
 <section id="discussion-and-limitations" class="level2">
 <h2 class="anchored" data-anchor-id="discussion-and-limitations">6. Discussion and limitations</h2>
-<p>Complaint handling was by far the most important predictor of overall workplace ratings. Alone, it explained about 68% of the variation in ratings and was the only addition that significantly improved model fit. Learning opportunities added a small amount beyond complaints, and the improvement was not statistically significant. Pay increases added essentially nothing once complaints and learning were included. This does not mean that learning and pay are unrelated to ratings. The three predictors are moderately correlated with each other (r = .60 to .67), so much of what learning and pay would explain is already captured by complaint handling.</p>
-<p>Several limitations apply. The sample contains only 30 departments, so estimates are imprecise (note the wide confidence interval for learning) and statistical tests have limited power. The observations are department-level summaries, so the results describe departments, not individual employees. The data are observational, so the coefficients describe associations, not causal effects. The choice between M1 and M2 rests on adjusted R² and RMSE, not on a statistically significant improvement, so a reader preferring a simpler model could reasonably choose M1. Finally, the reported performance is in-sample and does not show how well the model would predict ratings for new departments.</p>
+<p>The results suggest that complaint handling was the strongest predictor of overall workplace ratings. When included on its own, it explained approximately 68% of the variation in ratings and was the only predictor that significantly improved model fit. Although learning opportunities explained a small amount of additional variation, this improvement was not statistically significant. Pay increases contributed almost no additional explanatory value once complaint handling and learning opportunities were included. However, this does not necessarily mean that learning opportunities or pay increases are unimportant. Because the predictors were moderately correlated with one another (r = .60 to .67), some of the variation associated with learning and pay increases may already have been explained by complaint handling.</p>
+<p>There are also several limitations to consider. First, the analysis included only 30 departments, which limits statistical power and increases uncertainty in the estimates. This is particularly noticeable for learning opportunities, which had a relatively wide confidence interval. Another limitation is that the data represent department-level averages rather than individual employee responses, so the findings cannot necessarily be applied to individual employees. Additionally, because the data are observational, the results only demonstrate associations and cannot establish that any of these factors directly cause changes in workplace ratings.</p>
+<p>Finally, although I selected M2 because of its slightly better adjusted R² and RMSE, the improvement over M1 was not statistically significant. Therefore, selecting the simpler M1 model would also be reasonable. The results also reflect model performance using the same data on which the models were fitted, so further evaluation would be needed to determine how accurately the model predicts ratings for new departments.</p>
 
 
 </section>

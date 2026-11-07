@@ -36,9 +36,21 @@ dat <- attitude |>
 
 # Store the sample size so the text can refer to it with inline code
 n <- nrow(dat)
+
+# Helpers for writing numbers into the text (APA style: no leading zero for
+# values that cannot exceed 1, such as R-squared and p-values)
+no0 <- function(x, digits = 3) sub("^(-?)0\\.", "\\1.", sprintf(paste0("%.", digits, "f"), x))
+fmt_p <- function(p) ifelse(p < .001, "< .001", paste0("= ", no0(p, 3)))
+
+# Correlations among the analysis variables, quoted in the text
+cors <- cor(dat)
+pred_cors <- cors[c("complaints", "learning", "raises"), c("complaints", "learning", "raises")]
+pred_r <- range(pred_cors[lower.tri(pred_cors)])  # smallest and largest correlation between predictors
 ```
 
 The analysis includes **`r n` departments**. Each observation is a department-level summary of employee responses, not an individual employee.
+
+The data come from `attitude`, a dataset built into R that summarizes employee survey responses by department. The outcome variable is `rating`, the overall workplace rating, and the three predictors are `complaints` (handling of employee complaints), `learning` (opportunity to learn), and `raises` (pay increases).
 
 ### Descriptive statistics
 
@@ -130,7 +142,7 @@ ggplot(dat, aes(x = raises, y = rating)) +
 
 ### Exploratory patterns
 
-Overall workplace ratings across the 30 departments ranged from 40 to 85 (M = 64.63). The histogram shows ratings concentrated around 65, with a somewhat longer tail toward lower ratings and smaller clusters near 45 to 50 and 80. All three predictors were positively associated with rating, and the relationships appear approximately linear. Complaint handling showed the strongest and tightest relationship (r = .83), followed by learning opportunities (r = .62) and pay increases (r = .59). The predictors were also moderately correlated with each other (r = .60 to .67), which may matter when they are entered together. One department with the highest pay-increase score (about 88) had only a moderate overall rating, making it an unusual observation worth keeping in mind. These patterns are consistent with my expectations because  all three predictors showed positive, approximately linear associations with rating, and complaint handling showed the strongest relationship.
+The dataset includes `r n` departments, with overall workplace ratings ranging from `r min(dat$rating)` to `r max(dat$rating)` (M = `r sprintf("%.2f", mean(dat$rating))`). The histogram shows ratings concentrated around 65, although there are some lower ratings around 45-50 and higher ratings closer to 80. All three predictors showed positive relationships with overall workplace ratings, and these relationships appeared to be approximately linear. Complaint handling showed the strongest relationship with overall ratings (r = `r no0(cors["rating", "complaints"], 2)`), followed by learning opportunities (r = `r no0(cors["rating", "learning"], 2)`) and pay increases (r = `r no0(cors["rating", "raises"], 2)`). The predictors were also moderately correlated with one another (r = `r no0(pred_r[1], 2)` to `r no0(pred_r[2], 2)`), which could be important when including them in the same model. One observation that stood out was a department with a high pay-increase score of approximately `r max(dat$raises)` but only a moderate overall rating. Overall, these findings were consistent with what I expected, particularly the stronger relationship between complaint handling and workplace ratings.
 
 ---
 
@@ -138,7 +150,7 @@ Overall workplace ratings across the 30 departments ranged from 40 to 85 (M = 64
 
 ### Predictions
 
-I expected all three predictors to be positively associated with overall workplace ratings. Handling of employee complaints seemed the most likely to matter. When employees feel that problems are taken seriously and resolved fairly, they are likely to trust their workplace and rate it more favourably overall. Opportunities to learn should explain additional variation beyond complaint handling, because a workplace that supports growth and skill development reflects a different part of employee experience than how problems are managed. Pay increases may also add to the explanation after accounting for complaints and learning, since people tend to view fair compensation as a sign that their work is valued. However, I expected the pay increase to contribute less than the other two, because pay may overlap with the other predictors. For these reasons, I predicted that adding each predictor in turn would improve model fit, with complaints contributing the most.
+Before running the models, I expected complaint handling, learning opportunities, and pay increases to all have positive relationships with overall workplace ratings. Of the three, I thought complaint handling would have the strongest association because employees may be more satisfied with their workplace when they feel their concerns are being heard and addressed fairly. I also expected learning opportunities to explain some additional variation in ratings beyond complaint handling, since opportunities for professional development represent a different aspect of the workplace experience. Similarly, I thought pay increases could contribute to overall ratings after accounting for complaints and learning, because employees may feel more valued when they are compensated fairly. However, I expected pay increases to have a smaller contribution, as some of its relationship with ratings might overlap with the other predictors. Based on these expectations, I predicted that each additional variable would improve the model, with complaint handling making the largest contribution.
 
 We will estimate four nested models:
 
@@ -271,7 +283,9 @@ comparison_table |>
 
 ### Interpreting the model comparison
 
-M3 explained the largest proportion of variation in rating (R² = `r sprintf("%.4f", comparison_table$r.squared[4])`), but its advantage over M2 (R² = `r sprintf("%.4f", comparison_table$r.squared[3])`) was negligible. Adding complaints to the null model produced the only large improvement (ΔR² = `r sprintf("%.3f", comparison_table$Delta.R2[2])`, p < .001). Adding learning increased explained variance by only `r sprintf("%.3f", comparison_table$Delta.R2[3])` (p = `r sprintf("%.3f", comparison_table$Nested.p.value[3])`), and adding pay increases increased it by `r sprintf("%.4f", comparison_table$Delta.R2[4])` (p = `r sprintf("%.3f", comparison_table$Nested.p.value[4])`); neither improvement was statistically significant. Adjusted R² rose from `r sprintf("%.3f", comparison_table$adj.r.squared[2])` in M1 to `r sprintf("%.3f", comparison_table$adj.r.squared[3])` in M2, then fell to `r sprintf("%.3f", comparison_table$adj.r.squared[4])` in M3, suggesting that the pay-increase predictor added complexity without adding explanatory value. RMSE fell from `r sprintf("%.2f", comparison_table$RMSE[1])` for the null model to `r sprintf("%.2f", comparison_table$RMSE[2])` for M1, a substantively meaningful reduction, but changed by less than 0.3 rating points with the addition of learning and by almost nothing with the addition of pay increases. Overall, the results suggest that complaint handling is the key predictor of overall rating, and that learning opportunities and pay increases add little once complaints are accounted for.
+Although M3 explained the highest proportion of variation in workplace ratings (R² = `r no0(comparison_table$r.squared[4], 4)`), the difference between M3 and M2 (R² = `r no0(comparison_table$r.squared[3], 4)`) was extremely small. The greatest improvement occurred when complaint handling was added to the null model, explaining an additional `r sprintf("%.1f", 100 * comparison_table$Delta.R2[2])`% of the variation in ratings (p `r fmt_p(comparison_table$Nested.p.value[2])`). Adding learning opportunities increased the explained variation by only `r sprintf("%.1f", 100 * comparison_table$Delta.R2[3])`% (p `r fmt_p(comparison_table$Nested.p.value[3])`), while pay increases contributed almost nothing additional (ΔR² = `r no0(comparison_table$Delta.R2[4], 4)`, p `r fmt_p(comparison_table$Nested.p.value[4])`). Neither of these improvements was statistically significant.
+
+The adjusted R² increased from `r no0(comparison_table$adj.r.squared[2], 3)` in M1 to `r no0(comparison_table$adj.r.squared[3], 3)` in M2 but decreased to `r no0(comparison_table$adj.r.squared[4], 3)` in M3. This suggests that adding pay increases made the model more complex without meaningfully improving its performance. A similar pattern was seen with RMSE, which decreased substantially from `r sprintf("%.2f", comparison_table$RMSE[1])` in the null model to `r sprintf("%.2f", comparison_table$RMSE[2])` in M1. However, adding learning opportunities produced only a small further decrease, and adding pay increases had almost no effect. Overall, these findings suggest that complaint handling accounts for most of the variation explained by the models, while learning opportunities and pay increases provide limited additional information.
 
 ---
 
@@ -312,7 +326,19 @@ check_collinearity(selected_model) |>
   fmt_number(columns = where(is.numeric), decimals = 2)
 ```
 
-Residuals versus fitted values showed no clear curvature, with the smoothed line staying close to zero across the range of fitted values, suggesting that a linear specification is adequate for these data. The normal Q-Q plot showed residuals following the reference line through the middle of the distribution, with the most extreme residuals slightly less extreme than a normal distribution would predict. A Shapiro-Wilk test also did not detect a significant departure from normality (W = .945, p = .123), although with only 30 departments this test has limited power. The scale-location plot suggested that residual spread was somewhat larger at low fitted values and smaller in the middle of the range, but there was no clear funnel pattern, so there was no strong evidence of heteroscedasticity. In the residuals-versus-leverage plot, department 24 had the highest leverage but a small residual, and its Cook's distance (0.17) was well below the conventional cutoffs of 0.5 and 1, so no single department appears to dominate the fitted model. Variance inflation factors were 1.55 for both predictors, well below the usual threshold of 5, so multicollinearity does not appear to be a concern despite the moderate correlation between complaints and learning. Overall, the main assumptions appear reasonably satisfied. Given the small sample, these checks are best read as screening for serious problems, not as proof that the assumptions hold, and I retain reasonable confidence in the model.
+```{r}
+#| label: diagnostic-stats
+
+# Numeric diagnostics quoted in the text below, computed here so the report
+# does not depend on anything run in the Console
+shapiro <- shapiro.test(residuals(selected_model))       # normality of the residuals
+max_cooks <- max(cooks.distance(selected_model))         # largest Cook's distance
+vif_values <- check_collinearity(selected_model)$VIF     # one VIF per predictor
+```
+
+The residuals-versus-fitted plot did not show any obvious curved patterns, and the smoothed line remained close to zero. This suggests that a linear model is reasonable for these data. The normal Q-Q plot also showed that most residuals followed the reference line fairly closely, although there were some small differences at the extremes. The Shapiro-Wilk test was not statistically significant (W = `r no0(shapiro$statistic, 3)`, p `r fmt_p(shapiro$p.value)`), meaning there was no strong evidence that the residuals differed from a normal distribution. However, the small sample size should be considered when interpreting this result.
+
+The scale-location plot showed some differences in the spread of residuals, particularly at lower fitted values, but there was no obvious funnel-shaped pattern to suggest a major issue with unequal variance. In the residuals-versus-leverage plot, department 24 had the highest leverage but a relatively small residual. Its Cook's distance was `r sprintf("%.2f", max_cooks)`, which was below the commonly used thresholds of 0.5 and 1, suggesting that it did not have an unusually large influence on the model. The variance inflation factors were also low (VIF = `r sprintf("%.2f", max(vif_values))` for both predictors), indicating that multicollinearity was not a major concern. Overall, the diagnostic results did not identify any serious problems with the model assumptions, so I have reasonable confidence in using this model to interpret the associations. However, because the sample included only 30 departments, these findings should be interpreted cautiously.
 
 
 ---
@@ -320,6 +346,9 @@ Residuals versus fitted values showed no clear curvature, with the smoothed line
 ## 5. Model selection
 
 ### Why this model
+I selected M2, which includes complaint handling and learning opportunities, as the final model. The model comparisons showed that adding complaint handling significantly improved model fit compared with the null model (F = `r sprintf("%.1f", comparison_table$Nested.F.stat[2])`, p `r fmt_p(comparison_table$Nested.p.value[2])`). In contrast, adding learning opportunities (ΔR² = `r sprintf("%.3f", comparison_table$Delta.R2[3])`, p `r fmt_p(comparison_table$Nested.p.value[3])`) or pay increases (ΔR² = `r sprintf("%.4f", comparison_table$Delta.R2[4])`, p `r fmt_p(comparison_table$Nested.p.value[4])`) did not lead to statistically significant improvements.
+
+Despite this, M2 had the highest adjusted R² (`r sprintf("%.3f", comparison_table$adj.r.squared[3])`) and a slightly lower RMSE (`r sprintf("%.2f", comparison_table$RMSE[3])`) than M1 (`r sprintf("%.2f", comparison_table$RMSE[2])`). I decided against M3 because pay increases explained almost no additional variation and resulted in a lower adjusted R² (`r sprintf("%.3f", comparison_table$adj.r.squared[4])`). Although learning opportunities did not significantly improve the model, I chose to keep this predictor because it was relevant to my initial expectations and only added one additional variable. The diagnostic results also did not suggest any major concerns with M2, and the model remains easy to interpret, because each of its two predictors can be read directly in rating points. However, M1 would still be a reasonable alternative for someone who preferred a simpler model.
 
 ```{r}
 #| label: extract-coefficients
@@ -341,8 +370,6 @@ fmt_p <- function(p) {
 # Performance row for the selected model (label must match comparison_table)
 selected_row <- comparison_table[comparison_table$Model == selected_name, ]
 ```
-
-I selected M2 (complaints and learning). The nested F-tests showed that complaint handling significantly improved on the null model (F = 60.7, p < .001), whereas learning (ΔR² = .027, p = .135) and pay increases (ΔR² = .0003, p = .876) did not produce statistically significant improvements. Even so, M2 had the highest adjusted R² (.686, compared with .670 for M1 and .675 for M3) and a lower RMSE than M1 (6.47 compared with 6.76). I rejected M3 because pay increases added essentially nothing and lowered adjusted R². I preferred M2 to M1 because learning opportunities were a theoretically motivated predictor, the diagnostics showed no serious problems, and the added complexity is small. M1 remains a defensible simpler alternative, because the improvement from learning was not statistically significant.
 
 ### Coefficient table
 
@@ -375,11 +402,11 @@ coefficient_results |>
 
 ### Interpreting the coefficients
 
-Holding learning opportunities constant, a one-point increase in a department's complaint-handling score was associated with a `r sprintf("%.2f", coef_val("complaints", "estimate"))`-point higher predicted overall rating, 95% CI [`r sprintf("%.2f", coef_val("complaints", "conf.low"))`, `r sprintf("%.2f", coef_val("complaints", "conf.high"))`], p `r fmt_p(coef_val("complaints", "p.value"))`. The interval is entirely positive, so the data are consistent with a clear positive association.
+After accounting for learning opportunities (that is, holding them constant), a one-point increase in complaint-handling scores was associated with a predicted increase of approximately `r sprintf("%.2f", coef_val("complaints", "estimate"))` points in overall workplace ratings (95% CI [`r sprintf("%.2f", coef_val("complaints", "conf.low"))`, `r sprintf("%.2f", coef_val("complaints", "conf.high"))`], p `r fmt_p(coef_val("complaints", "p.value"))`). Since the confidence interval does not include zero, this provides evidence of a positive association between complaint handling and workplace ratings.
 
-Holding complaint handling constant, a one-point increase in the learning-opportunity score was associated with a `r sprintf("%.2f", coef_val("learning", "estimate"))`-point higher predicted overall rating, 95% CI [`r sprintf("%.2f", coef_val("learning", "conf.low"))`, `r sprintf("%.2f", coef_val("learning", "conf.high"))`], p `r fmt_p(coef_val("learning", "p.value"))`. The direction is positive, but the interval includes zero, so the data are also consistent with no association, and this estimate is much less certain than the one for complaints.
+For learning opportunities, a one-point increase was associated with a predicted increase of approximately `r sprintf("%.2f", coef_val("learning", "estimate"))` points in overall workplace ratings after accounting for complaint handling (95% CI [`r sprintf("%.2f", coef_val("learning", "conf.low"))`, `r sprintf("%.2f", coef_val("learning", "conf.high"))`], p `r fmt_p(coef_val("learning", "p.value"))`). Although this relationship was positive, it was not statistically significant, and the confidence interval included zero. Therefore, there is more uncertainty about the contribution of learning opportunities compared with complaint handling.
 
-Each variable is a department-level score representing the percentage of favourable employee responses, so a one-point difference corresponds to a one-percentage-point difference in the proportion of favourable responses.
+It is also important to consider that these scores represent the percentage of favourable responses within each department. Therefore, a one-point increase in a predictor represents a one-percentage-point increase in favourable employee responses.
 
 ### Model performance
 
@@ -400,13 +427,15 @@ selected_row |>
   fmt_number(columns = where(is.numeric), decimals = 3)
 ```
 
-The selected model explained approximately `r round(100 * selected_row$r.squared, 1)`% of the variation in overall workplace ratings across these departments (R² = `r round(selected_row$r.squared, 3)`; adjusted R² = `r round(selected_row$adj.r.squared, 3)`). Its in-sample RMSE was `r round(selected_row$RMSE, 2)` rating points, meaning that the fitted ratings typically differ from the observed ratings by about that much. This describes fit to these 30 departments, not accuracy for new departments.
+The selected model explained approximately `r sprintf("%.1f", 100 * selected_row$r.squared)`% of the variation in workplace ratings across the `r n` departments (R² = `r no0(selected_row$r.squared, 3)`), with an adjusted R² of `r no0(selected_row$adj.r.squared, 3)`. The RMSE was `r sprintf("%.2f", selected_row$RMSE)`, suggesting that the model's predicted ratings typically differed from the actual ratings by approximately `r sprintf("%.2f", selected_row$RMSE)` points. However, this only reflects how well the model fits the departments included in the analysis and does not necessarily indicate how well it would predict ratings for other departments.
 
 
 ---
 
 ## 6. Discussion and limitations
 
-Complaint handling was by far the most important predictor of overall workplace ratings. Alone, it explained about 68% of the variation in ratings and was the only addition that significantly improved model fit. Learning opportunities added a small amount beyond complaints, and the improvement was not statistically significant. Pay increases added essentially nothing once complaints and learning were included. This does not mean that learning and pay are unrelated to ratings. The three predictors are moderately correlated with each other (r = .60 to .67), so much of what learning and pay would explain is already captured by complaint handling.
+The results suggest that complaint handling was the strongest predictor of overall workplace ratings. When included on its own, it explained approximately `r round(100 * comparison_table$r.squared[2])`% of the variation in ratings and was the only predictor that significantly improved model fit. Although learning opportunities explained a small amount of additional variation, this improvement was not statistically significant. Pay increases contributed almost no additional explanatory value once complaint handling and learning opportunities were included. However, this does not necessarily mean that learning opportunities or pay increases are unimportant. Because the predictors were moderately correlated with one another (r = `r no0(pred_r[1], 2)` to `r no0(pred_r[2], 2)`), some of the variation associated with learning and pay increases may already have been explained by complaint handling.
 
-Several limitations apply. The sample contains only 30 departments, so estimates are imprecise (note the wide confidence interval for learning) and statistical tests have limited power. The observations are department-level summaries, so the results describe departments, not individual employees. The data are observational, so the coefficients describe associations, not causal effects. The choice between M1 and M2 rests on adjusted R² and RMSE, not on a statistically significant improvement, so a reader preferring a simpler model could reasonably choose M1. Finally, the reported performance is in-sample and does not show how well the model would predict ratings for new departments.
+There are also several limitations to consider. First, the analysis included only `r n` departments, which limits statistical power and increases uncertainty in the estimates. This is particularly noticeable for learning opportunities, which had a relatively wide confidence interval. Another limitation is that the data represent department-level averages rather than individual employee responses, so the findings cannot necessarily be applied to individual employees. Additionally, because the data are observational, the results only demonstrate associations and cannot establish that any of these factors directly cause changes in workplace ratings.
+
+Finally, although I selected M2 because of its slightly better adjusted R² and RMSE, the improvement over M1 was not statistically significant. Therefore, selecting the simpler M1 model would also be reasonable. The results also reflect model performance using the same data on which the models were fitted, so further evaluation would be needed to determine how accurately the model predicts ratings for new departments.
