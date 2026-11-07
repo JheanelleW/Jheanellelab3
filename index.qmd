@@ -104,10 +104,33 @@ ggplot(dat, aes(x = complaints, y = rating)) +
   labs(x = "Handling of employee complaints", y = "Overall rating") +
   theme_minimal(base_size = 12)
 ```
+```{r}
+#| label: learning-scatterplot
+#| fig-cap: "Relationship between learning opportunities and overall rating"
+
+# Same plot as above, for the learning predictor
+ggplot(dat, aes(x = learning, y = rating)) +
+  geom_point(alpha = 0.75) +
+  geom_smooth(method = "lm", se = TRUE, color = "#27638A") +
+  labs(x = "Opportunity to learn", y = "Overall rating") +
+  theme_minimal(base_size = 12)
+```
+
+```{r}
+#| label: raises-scatterplot
+#| fig-cap: "Relationship between pay increases and overall rating"
+
+# Same plot as above, for the raises predictor
+ggplot(dat, aes(x = raises, y = rating)) +
+  geom_point(alpha = 0.75) +
+  geom_smooth(method = "lm", se = TRUE, color = "#27638A") +
+  labs(x = "Pay increases", y = "Overall rating") +
+  theme_minimal(base_size = 12)
+```
 
 ### Exploratory patterns
 
-Overall workplace ratings across the 30 departments ranged from 40 to 85 (M = 64.63). The histogram shows ratings concentrated around 65, with a somewhat longer tail toward lower ratings and smaller clusters near 45 to 50 and 80. All three predictors were positively associated with rating, and the relationships appear approximately linear. Complaint handling showed the strongest and tightest relationship (r = .83), followed by learning opportunities (r = .62) and pay increases (r = .59). The predictors were also moderately correlated with each other (r = .60 to .67), which may matter when they are entered together. One department with the highest pay-increase score (about 88) had only a moderate overall rating, making it an unusual observation worth checking in the diagnostics. These patterns [are consistent with / differ from] my expectations because [your reason].
+Overall workplace ratings across the 30 departments ranged from 40 to 85 (M = 64.63). The histogram shows ratings concentrated around 65, with a somewhat longer tail toward lower ratings and smaller clusters near 45 to 50 and 80. All three predictors were positively associated with rating, and the relationships appear approximately linear. Complaint handling showed the strongest and tightest relationship (r = .83), followed by learning opportunities (r = .62) and pay increases (r = .59). The predictors were also moderately correlated with each other (r = .60 to .67), which may matter when they are entered together. One department with the highest pay-increase score (about 88) had only a moderate overall rating, making it an unusual observation worth keeping in mind. These patterns are consistent with my expectations because  all three predictors showed positive, approximately linear associations with rating, and complaint handling showed the strongest relationship.
 
 ---
 
@@ -140,31 +163,6 @@ mod3 <- lm(rating ~ complaints + learning + raises, data = dat)   # + raises
 ### How the complaints coefficient changes
 
 In M1, the complaints coefficient (`r round(coef(mod1)["complaints"], 2)`) describes the association between complaint handling and overall rating with nothing else controlled: departments scoring one point higher on complaint handling were rated about `r round(coef(mod1)["complaints"], 2)` points higher overall, on average. In M2, the coefficient (`r round(coef(mod2)["complaints"], 2)`) is the association after holding learning opportunities constant. It is smaller, because part of the M1 association overlapped with learning. In M3, the coefficient (`r round(coef(mod3)["complaints"], 2)`) is the association holding both learning and pay increases constant. It is nearly unchanged from M2, so adding pay increases did not account for any further part of the complaints association. In all three models, complaint handling remained positively associated with rating.
-
-```{r}
-#| label: learning-scatterplot
-#| fig-cap: "Relationship between learning opportunities and overall rating"
-
-# Same plot as above, for the learning predictor
-ggplot(dat, aes(x = learning, y = rating)) +
-  geom_point(alpha = 0.75) +
-  geom_smooth(method = "lm", se = TRUE, color = "#27638A") +
-  labs(x = "Opportunity to learn", y = "Overall rating") +
-  theme_minimal(base_size = 12)
-```
-
-```{r}
-#| label: raises-scatterplot
-#| fig-cap: "Relationship between pay increases and overall rating"
-
-# Same plot as above, for the raises predictor
-ggplot(dat, aes(x = raises, y = rating)) +
-  geom_point(alpha = 0.75) +
-  geom_smooth(method = "lm", se = TRUE, color = "#27638A") +
-  labs(x = "Pay increases", y = "Overall rating") +
-  theme_minimal(base_size = 12)
-```
-
 
 ---
 
@@ -271,7 +269,9 @@ comparison_table |>
   )
 ```
 
-[Write your model-comparison paragraph here, after you've seen the table.]
+### Interpreting the model comparison
+
+M3 explained the largest proportion of variation in rating (R² = `r sprintf("%.4f", comparison_table$r.squared[4])`), but its advantage over M2 (R² = `r sprintf("%.4f", comparison_table$r.squared[3])`) was negligible. Adding complaints to the null model produced the only large improvement (ΔR² = `r sprintf("%.3f", comparison_table$Delta.R2[2])`, p < .001). Adding learning increased explained variance by only `r sprintf("%.3f", comparison_table$Delta.R2[3])` (p = `r sprintf("%.3f", comparison_table$Nested.p.value[3])`), and adding pay increases increased it by `r sprintf("%.4f", comparison_table$Delta.R2[4])` (p = `r sprintf("%.3f", comparison_table$Nested.p.value[4])`); neither improvement was statistically significant. Adjusted R² rose from `r sprintf("%.3f", comparison_table$adj.r.squared[2])` in M1 to `r sprintf("%.3f", comparison_table$adj.r.squared[3])` in M2, then fell to `r sprintf("%.3f", comparison_table$adj.r.squared[4])` in M3, suggesting that the pay-increase predictor added complexity without adding explanatory value. RMSE fell from `r sprintf("%.2f", comparison_table$RMSE[1])` for the null model to `r sprintf("%.2f", comparison_table$RMSE[2])` for M1, a substantively meaningful reduction, but changed by less than 0.3 rating points with the addition of learning and by almost nothing with the addition of pay increases. Overall, the results suggest that complaint handling is the key predictor of overall rating, and that learning opportunities and pay increases add little once complaints are accounted for.
 
 ---
 
@@ -312,12 +312,12 @@ check_collinearity(selected_model) |>
   fmt_number(columns = where(is.numeric), decimals = 2)
 ```
 
-Residuals versus fitted values showed [no clear curvature / describe any pattern], suggesting that a linear specification is [adequate / questionable]. The normal Q-Q plot showed [points close to the line / deviations at the tails], and a Shapiro-Wilk test did not detect a significant departure from normality (W = .945, p = .123), although with only 30 departments this test has limited power. The scale-location plot showed [roughly constant spread / describe]. The largest Cook's distance was 0.17 (department 24), well below the conventional cutoffs of 0.5 and 1, so no single department appears to dominate the fitted model. Variance inflation factors were [value] for both predictors, below the usual threshold of 5, so multicollinearity does not appear to be a concern despite the moderate correlation between complaints and learning. Overall, the main assumptions appear reasonably satisfied. [Mention any caveat you saw in the plots.] Given the small sample, these checks are best read as screening for serious problems, not as proof that the assumptions hold, and I retain reasonable confidence in the model.
+Residuals versus fitted values showed no clear curvature, with the smoothed line staying close to zero across the range of fitted values, suggesting that a linear specification is adequate for these data. The normal Q-Q plot showed residuals following the reference line through the middle of the distribution, with the most extreme residuals slightly less extreme than a normal distribution would predict. A Shapiro-Wilk test also did not detect a significant departure from normality (W = .945, p = .123), although with only 30 departments this test has limited power. The scale-location plot suggested that residual spread was somewhat larger at low fitted values and smaller in the middle of the range, but there was no clear funnel pattern, so there was no strong evidence of heteroscedasticity. In the residuals-versus-leverage plot, department 24 had the highest leverage but a small residual, and its Cook's distance (0.17) was well below the conventional cutoffs of 0.5 and 1, so no single department appears to dominate the fitted model. Variance inflation factors were 1.55 for both predictors, well below the usual threshold of 5, so multicollinearity does not appear to be a concern despite the moderate correlation between complaints and learning. Overall, the main assumptions appear reasonably satisfied. Given the small sample, these checks are best read as screening for serious problems, not as proof that the assumptions hold, and I retain reasonable confidence in the model.
 
 
 ---
 
-## 5. Select and report the preferred model
+## 5. Model selection
 
 ### Why this model
 
@@ -375,11 +375,11 @@ coefficient_results |>
 
 ### Interpreting the coefficients
 
-Holding learning opportunities constant, a one-point increase in a department's complaint-handling score was associated with a `r round(coef_val("complaints", "estimate"), 2)`-point higher predicted overall rating, 95% CI [`r round(coef_val("complaints", "conf.low"), 2)`, `r round(coef_val("complaints", "conf.high"), 2)`], p `r fmt_p(coef_val("complaints", "p.value"))`. The interval is entirely positive, so the data are consistent with a clear positive association.
+Holding learning opportunities constant, a one-point increase in a department's complaint-handling score was associated with a `r sprintf("%.2f", coef_val("complaints", "estimate"))`-point higher predicted overall rating, 95% CI [`r sprintf("%.2f", coef_val("complaints", "conf.low"))`, `r sprintf("%.2f", coef_val("complaints", "conf.high"))`], p `r fmt_p(coef_val("complaints", "p.value"))`. The interval is entirely positive, so the data are consistent with a clear positive association.
 
-Holding complaint handling constant, a one-point increase in the learning-opportunity score was associated with a `r round(coef_val("learning", "estimate"), 2)`-point higher predicted overall rating, 95% CI [`r round(coef_val("learning", "conf.low"), 2)`, `r round(coef_val("learning", "conf.high"), 2)`], p `r fmt_p(coef_val("learning", "p.value"))`. The direction is positive, but the interval includes zero, so the data are also consistent with no association, and this estimate is much less certain than the one for complaints.
+Holding complaint handling constant, a one-point increase in the learning-opportunity score was associated with a `r sprintf("%.2f", coef_val("learning", "estimate"))`-point higher predicted overall rating, 95% CI [`r sprintf("%.2f", coef_val("learning", "conf.low"))`, `r sprintf("%.2f", coef_val("learning", "conf.high"))`], p `r fmt_p(coef_val("learning", "p.value"))`. The direction is positive, but the interval includes zero, so the data are also consistent with no association, and this estimate is much less certain than the one for complaints.
 
-All scores are department-level percentages of favourable responses, so a one-point difference is a one-percentage-point difference.
+Each variable is a department-level score representing the percentage of favourable employee responses, so a one-point difference corresponds to a one-percentage-point difference in the proportion of favourable responses.
 
 ### Model performance
 
